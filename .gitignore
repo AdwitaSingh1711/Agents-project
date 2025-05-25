@@ -1,0 +1,34 @@
+# Virtual environment
+.venv/
+venv/
+
+# Python cache/compiled files
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.so
+.Python
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+
+# Local development artifacts
+*.DS_Store
+dist/
+build/
+
+# Streamlit secrets
+secrets.toml
