@@ -21,5 +21,6 @@ class Sanitise_Data_Validator_Agent(AgentBase):
             }
         ]
 
-        article = self.call_openai(messages, max_tokens=300)
+        # article = self.call_openai(messages, max_tokens=300)
+        article = self.call_llama(messages, max_tokens=512)
         return article

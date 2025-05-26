@@ -11,5 +11,6 @@ class Summarise_Tool(AgentBase):
              f"{text}\n\nSummary:"}
         ]
 
-        summary = self.call_openai(messages, max_tokens=300)
+        # summary = self.call_openai(messages, max_tokens=300)
+        summary = self.call_llama(messages, max_tokens=300)
         return summary

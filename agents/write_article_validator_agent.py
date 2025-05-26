@@ -21,5 +21,6 @@ class Write_Article_Validator_Agent(AgentBase):
             }
         ]
 
-        article = self.call_openai(messages, max_tokens=300)
-        return article
+        # article = self.call_openai(messages, max_tokens=300)
+        validation = self.call_llama(messages, max_tokens=512)
+        return validation

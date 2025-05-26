@@ -11,7 +11,7 @@ class Agent_Manager():
     def __init__(self, max_retries=2, verbose=True):
         self.agents = {
         "summarise":Summarise_Tool(max_retries=max_retries, verbose=verbose),
-        "write_Article":Write_Article_Validator_Agent(max_retries=max_retries, verbose=verbose),
+        "write_Article":Write_Article_Tool(max_retries=max_retries, verbose=verbose),
         "sanitise_Data":Sanitise_Data_Tool(max_retries=max_retries, verbose=verbose),
         "summarise_validator":Summarise_Validator_Agent(max_retries=max_retries, verbose=verbose),
         "write_article_validator": Write_Article_Validator_Agent(max_retries=max_retries, verbose=verbose),

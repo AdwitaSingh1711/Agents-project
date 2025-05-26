@@ -1,4 +1,5 @@
-import openai
+# import openai
+import ollama
 from abc import ABC, abstractmethod
 from loguru import logger
 import os
@@ -6,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-openai.api_key = os.getenv('OPEN_AI_API_KEY')
+# openai.api_key = os.getenv('OPEN_AI_API_KEY')
 
 class AgentBase(ABC):
     def __init__(self, name, max_retries=2, verbose=True):
@@ -18,7 +19,7 @@ class AgentBase(ABC):
     def execute(self, *args, **kwargs):
         pass
 
-    def call_openai(self, messages, temperature = 0.7, max_tokens = 150):
+    def call_llama(self, messages, temperature = 0.7, max_tokens = 150):
         retries=0
         while retries < self.max_retries:
             try:
@@ -27,14 +28,15 @@ class AgentBase(ABC):
                     for msg in messages:
                         logger.debug(f"{msg['role']}: {msg['content']}")
                 
-                response = openai.chat.completions.create(
-                    model = "gpt-4o",
+                response = ollama.chat(
+                    model = 'llama3.2:latest',
                     messages = messages,
-                    temperature=temperature,
-                    max_tokens = max_tokens
+                    # temperature=temperature,
+                    # max_tokens = max_tokens
                 )
 
-                reply = response.choices[0].message
+                # reply = response.choices[0].message
+                reply = response['message']['content']
                 if self.verbose:
                     logger.info(f"[{self.name}] Received response {reply}")
                 
@@ -44,4 +46,4 @@ class AgentBase(ABC):
                 retries+=1
                 logger.error(f"[{self.name}] Error during OpenAI call: {e}. Retry {retries}/{self.max_retries}")
         
-        raise Exception(f"[{self.name}] Failed to get response from OpenAI after {self.max_retries} retries.")
+        raise Exception(f"[{self.name}] Failed to get response from LLama after {self.max_retries} retries.")

@@ -42,13 +42,13 @@ def summarise_section(agent_manager):
     if st.button("Summarise"):
         if text:
             main_agent = agent_manager.get_agent("summarise")
-            validator_agent = agent_manager.get_agent("summarize_validator")
+            validator_agent = agent_manager.get_agent("summarise_validator")
 
             with st.spinner("Summarising..."):
                 try:
-                    sumaary = main_agent.execute(text)
+                    summary = main_agent.execute(text)
                     st.subheader("Summary:")
-                    st.write(sumaary)
+                    st.write(summary)
                 except Exception as e:
                     st.error(f"Error:{e}")
                     logger.error(f"Summarisation Agent Error: {e}")
@@ -56,7 +56,7 @@ def summarise_section(agent_manager):
                     
             with st.spinner("Validating Summary..."):
                 try:
-                    validation = validator_agent(original_text= text, summary = sumaary)
+                    validation = validator_agent.execute(original_text= text, summary = summary)
                     st.subheader("Validation:")
                     st.write(validation)
                 except Exception as e:
@@ -65,7 +65,7 @@ def summarise_section(agent_manager):
                         
             
         else:
-            st.warning("Please enter some text to summarize.")
+            st.warning("Please enter some text to summarise.")
     
 def write_and_refine_article_section(agent_manager):
     st.header("Write and Refine Research Article")

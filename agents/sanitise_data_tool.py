@@ -11,5 +11,6 @@ class Sanitise_Data_Tool(AgentBase):
              f"{medical_data}\n\nSanitised Data:"}
         ]
 
-        sanitised_data = self.call_openai(messages, max_tokens=300)
+        # sanitised_data = self.call_openai(messages, max_tokens=300)
+        sanitised_data = self.call_llama(messages, max_tokens=500)
         return sanitised_data

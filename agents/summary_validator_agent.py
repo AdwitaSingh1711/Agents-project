@@ -21,5 +21,6 @@ class Summarise_Validator_Agent(AgentBase):
             }
         ]
 
-        validation = self.call_openai(messages, max_tokens=300)
-        return validation 
+        # validation = self.call_openai(messages, max_tokens=300)
+        validation = self.call_llama(messages, max_tokens=512)
+        return validation
